@@ -40,7 +40,7 @@ const Carousel = () => {
     setTrending(data)
   }
 
-//   console.log(trending);
+  console.log(trending);
 
   useEffect(() => {  //fetching everytime the currency changes
     fetchTrendingCoins()
