@@ -1,10 +1,12 @@
 import React from 'react'
 import Banner from '../Components/Banner'
+import Coinstable from '../Components/Coinstable'
 import Header from '../Components/Header'
 
 const HomePage = () => {
   return <>
     <Banner />
+    <Coinstable />
   </>
 
 }

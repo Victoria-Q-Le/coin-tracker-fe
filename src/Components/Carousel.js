@@ -11,6 +11,14 @@ const useStyles = makeStyles((theme) => ({
         height: "50%",
         display: "flex",
         alignItems: "center",
+    },
+    carouselItem: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems:"center",
+      cursor: "pointer",
+      textTransform: "uppercase",
+      color: "white"
     }
 }))
 
@@ -67,7 +75,11 @@ const Carousel = () => {
             <span>
               {coin?.symbol} &nbsp; 
 
-              <span>{profit && "+"} {coin?.price_change_percentage_24h?.toFixed(2)}</span>
+              <span 
+                style={{color: profit > 0 ? "rgb(14,203,129)" : "red", fontWeight: 500}}
+                >
+                {profit && "+"} {coin?.price_change_percentage_24h?.toFixed(2) + "%"}
+              </span>
               {/* if the profit is true, display profit and the + sign along with percentage change */}
             </span>
 
