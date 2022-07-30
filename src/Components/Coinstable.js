@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CoinList } from '../config/api'
 import { CoinState } from '../CoinContext'
-import { Container, createTheme, ThemeProvider, Typography } from '@material-ui/core'
+import { Container, createTheme, TextField, ThemeProvider, Typography } from '@material-ui/core'
 
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
@@ -35,8 +35,14 @@ const Coinstable = () => {
           variant='h4'
           style = {{margin: 18, fontFamily: "Montserrat"}}
         >
-          
+          Cryptocurrency Prices by Market Cap
         </Typography>
+
+        <TextField
+          label =" Search For a Crypto Currency" 
+          variant='outlined'
+          style={{marginBottom: 20, width: "100%"}}>
+        </TextField>
       </Container>
     </ThemeProvider>
   )
