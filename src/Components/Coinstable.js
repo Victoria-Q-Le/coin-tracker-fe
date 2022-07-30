@@ -7,6 +7,7 @@ import { Container, createTheme, TextField, ThemeProvider, Typography } from '@m
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState()
   const {currency} = CoinState()
 
   const fetchCoins = async() => {
@@ -39,10 +40,12 @@ const Coinstable = () => {
         </Typography>
 
         <TextField
-          label =" Search For a Crypto Currency" 
+          label =" Search For a Crypto Currency..." 
           variant='outlined'
-          style={{marginBottom: 20, width: "100%"}}>
-        </TextField>
+          style={{marginBottom: 20, width: "100%"}}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+    
       </Container>
     </ThemeProvider>
   )
