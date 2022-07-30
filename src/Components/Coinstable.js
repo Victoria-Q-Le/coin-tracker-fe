@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CoinList } from '../config/api'
 import { CoinState } from '../CoinContext'
-import { Container, createTheme, LinearProgress, TableContainer, TextField, ThemeProvider, Typography } from '@material-ui/core'
+import { Container, createTheme, LinearProgress, Table, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core'
 
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
@@ -50,7 +50,21 @@ const Coinstable = () => {
         <TableContainer>
           {loading 
             ? <LinearProgress style = {{backgroundColor: "gold"}}></LinearProgress>
-            : <></>
+            : <Table>
+                <TableHead style={{backgroundColor: "gold"}}>
+                  <TableRow>
+                    {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
+                      <TableCell
+                        style={{color: "black", fontWeight: "700", fontFamily:"Montserrat"}}
+                        key={head}
+                        align={head === "Coin" ? "" : "right"}
+                      >
+                        {head}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+              </Table>
           }
         </TableContainer>
     
