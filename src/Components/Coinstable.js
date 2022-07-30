@@ -2,12 +2,13 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CoinList } from '../config/api'
 import { CoinState } from '../CoinContext'
-import { Container, createTheme, TextField, ThemeProvider, Typography } from '@material-ui/core'
+import { Container, createTheme, LinearProgress, TableContainer, TextField, ThemeProvider, Typography } from '@material-ui/core'
 
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState()
+
   const {currency} = CoinState()
 
   const fetchCoins = async() => {
@@ -45,6 +46,13 @@ const Coinstable = () => {
           style={{marginBottom: 20, width: "100%"}}
           onChange={(e) => setSearch(e.target.value)}
         />
+
+        <TableContainer>
+          {loading 
+            ? <LinearProgress style = {{backgroundColor: "gold"}}></LinearProgress>
+            : <></>
+          }
+        </TableContainer>
     
       </Container>
     </ThemeProvider>
