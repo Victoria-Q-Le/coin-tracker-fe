@@ -6,6 +6,7 @@ import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, T
 import { Classnames } from 'react-alice-carousel'
 import { useHistory } from 'react-router-dom'
 import { numberWithCommas } from './Carousel'
+import { Pagination } from '@material-ui/lab'
 
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
@@ -49,6 +50,11 @@ const Coinstable = () => {
         backgroundColor: "#131111",
       },
       fontFamily: "Montserrat",
+    },
+    pagination: {
+      "& .MuiPaginationItem-root": {
+        color: "gold"
+      }
     }
   })
 
@@ -143,7 +149,23 @@ const Coinstable = () => {
               </Table>
           }
         </TableContainer>
-    
+        
+        <Pagination
+          count = {(handleSearch()?.length / 10).toFixed(0)}
+          style = {{
+            padding: 20,
+            width: "100%",
+            display: "flex",
+            justifyContent: "center"
+          }}
+          classes = {{ul: classes.pagination}}
+          onChange = {(_, value) => {
+            setPage(value)
+            window.scroll(0,450)
+          }}
+        >
+
+        </Pagination>
       </Container>
     </ThemeProvider>
   )
