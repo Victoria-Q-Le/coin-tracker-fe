@@ -89,7 +89,26 @@ const Coinstable = () => {
                         className = {classes.row}
                         key = {row.name}
                       >
+                        <TableCell 
+                          component='th'
+                          scope='row'
+                          style={{display: "flex", gap: 15}}
+                        >
+                          <img 
+                            src={row.image}
+                            alt= {row.name}
+                            height="50"
+                            style={{marginBottom: 10}}
+                          />
 
+                          <div style={{display:"flex", flexDirection:"column"}}>
+                            <span style={{textTransform: "uppercase", fontSize:22}}>
+                              {row.symbol}
+                            </span>
+
+                            <span style={{color: "darkgray"}}> {row.name} </span>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     )
                   })}
