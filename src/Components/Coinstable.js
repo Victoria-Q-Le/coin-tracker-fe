@@ -90,7 +90,9 @@ const Coinstable = () => {
                 </TableHead>
 
                 <TableBody>
-                  {handleSearch().map(row => {
+                  {handleSearch()
+                    .slice((page - 1)*10, (page - 1) * 10 + 10)//this will ensure that only 10 coins will be displayed at each page 
+                    .map(row => {
                     const profit = row.price_change_percentage_24h > 0;
                     return (
                       <TableRow
