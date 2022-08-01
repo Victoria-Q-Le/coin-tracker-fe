@@ -10,7 +10,8 @@ import { numberWithCommas } from './Carousel'
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
   const [loading, setLoading] = useState(false)
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState("")
+  const [page, setPage] = useState(1)
   const history = useHistory()
 
   const {currency, symbol} = CoinState()
@@ -40,9 +41,16 @@ const Coinstable = () => {
     ))
   }
 
-  const useStyles = makeStyles(() => ({
-
-  }))
+  const useStyles = makeStyles({
+    row: {
+      backgroundColor: "#16171a",
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: "#131111",
+      },
+      fontFamily: "Montserrat",
+    }
+  })
 
   const classes = useStyles()
 
@@ -111,6 +119,10 @@ const Coinstable = () => {
                           </div>
                         </TableCell>
 
+                        <TableCell align='right'>
+                          {symbol} {" "} {numberWithCommas(row.current_price.toFixed(2))}
+                        </TableCell>
+
                         <TableCell
                           align='right'
                           style={{color: profit > 0 ? "rgb(14,203,129)" : "red", fontWeight: 500}}
@@ -119,7 +131,8 @@ const Coinstable = () => {
                         </TableCell>
 
                         <TableCell align='right'>
-                          {symbol} {" "} {numberWithCommas(row.current_price.toFixed(2))}
+                          {symbol} {" "} {numberWithCommas(row.market_cap.toString().slice(0,-6))} M
+                          {/* Because the return cap values are in million so I used the slice to cut off the last 6 digits and replaced with M */}
                         </TableCell>
                       </TableRow>
                     )
