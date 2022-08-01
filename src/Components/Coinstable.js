@@ -5,6 +5,7 @@ import { CoinState } from '../CoinContext'
 import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core'
 import { Classnames } from 'react-alice-carousel'
 import { useHistory } from 'react-router-dom'
+import { numberWithCommas } from './Carousel'
 
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
@@ -12,7 +13,7 @@ const Coinstable = () => {
   const [search, setSearch] = useState()
   const history = useHistory()
 
-  const {currency} = CoinState()
+  const {currency, symbol} = CoinState()
 
   const fetchCoins = async() => {
     setLoading(true)
@@ -108,6 +109,17 @@ const Coinstable = () => {
 
                             <span style={{color: "darkgray"}}> {row.name} </span>
                           </div>
+                        </TableCell>
+
+                        <TableCell
+                          align='right'
+                          style={{color: profit > 0 ? "rgb(14,203,129)" : "red", fontWeight: 500}}
+                        >
+                          {profit && "+"} {row.price_change_percentage_24h.toFixed(2)}%
+                        </TableCell>
+
+                        <TableCell align='right'>
+                          {symbol} {" "} {numberWithCommas(row.current_price.toFixed(2))}
                         </TableCell>
                       </TableRow>
                     )
