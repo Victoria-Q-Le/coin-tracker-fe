@@ -2,12 +2,15 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CoinList } from '../config/api'
 import { CoinState } from '../CoinContext'
-import { Container, createTheme, LinearProgress, Table, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core'
+import { Container, createTheme, LinearProgress, makeStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@material-ui/core'
+import { Classnames } from 'react-alice-carousel'
+import { useHistory } from 'react-router-dom'
 
 const Coinstable = () => {
   const [coins, setCoins] = useState([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState()
+  const history = useHistory()
 
   const {currency} = CoinState()
 
@@ -29,6 +32,18 @@ const Coinstable = () => {
       type: "dark",
     }
   })
+
+  const handleSearch = () => {
+    return coins.filter((coin) => (
+      coin.name.toLowerCase().includes(search) || coin.symbol.toLowerCase().includes(search)
+    ))
+  }
+
+  const useStyles = makeStyles(() => ({
+
+  }))
+
+  const classes = useStyles()
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -64,6 +79,21 @@ const Coinstable = () => {
                     ))}
                   </TableRow>
                 </TableHead>
+
+                <TableBody>
+                  {handleSearch().map(row => {
+                    const profit = row.price_change_percentage_24h > 0;
+                    return (
+                      <TableRow
+                        onClick = {() => history.pushState(`/coins/${row.id}`)}
+                        className = {classes.row}
+                        key = {row.name}
+                      >
+
+                      </TableRow>
+                    )
+                  })}
+                  </TableBody>
               </Table>
           }
         </TableContainer>
