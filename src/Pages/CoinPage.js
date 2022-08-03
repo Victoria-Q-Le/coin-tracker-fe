@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { SingleCoin } from '../config/api'
 import {CoinState} from '../CoinContext'
-import { makeStyles, Typography } from '@material-ui/core'
+import { LinearProgress, makeStyles, Typography } from '@material-ui/core'
 import CoinInfo from '../Components/CoinInfo'
+import { numberWithCommas } from '../Components/Carousel'
 
 
 const CoinPage = () => {
@@ -57,6 +58,8 @@ const CoinPage = () => {
 
   const classes = useStyles()
 
+  if (!coin) return <LinearProgress style = {{backgroundColor: "gold"}}/>
+
   return (
     
     <div className= {classes.container}>
@@ -96,7 +99,7 @@ const CoinPage = () => {
               variant='h5'
               style={{fontFamily: "Montserrat"}}
             >
-             {symbol} {" "}
+             {symbol} {" "} {numberWithCommas(coin?.market_data.current_price[currency.toLowerCase()])}
             </Typography>
           </span>
 
