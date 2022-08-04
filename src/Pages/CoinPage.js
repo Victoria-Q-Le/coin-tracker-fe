@@ -53,6 +53,23 @@ const CoinPage = () => {
       paddingBottom: 15,
       paddingTop: 0,
       textAlign: "justify"
+    },
+    marketData: {
+      alignSelf: "start",
+      padding: 25,
+      paddingTop: 10,
+      width: "100%",
+      [theme.breakpoints.down("md")]: {
+        display: 'flex',
+        justifyContent: "space-around"
+      },
+      [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        alignItems: "center"
+      },
+      [theme.breakpoints.down("xs")]: {
+        alignItems: "start"
+      }
     }
   }))
 
