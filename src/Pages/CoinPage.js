@@ -19,7 +19,7 @@ const CoinPage = () => {
   }
   useEffect(() => {
     fetchCoin()
-  },[])
+  },[currency])
   console.log(coin);
 
   const useStyles = makeStyles((theme) => ({
@@ -39,12 +39,12 @@ const CoinPage = () => {
       flexDirection: "column",
       alignItems: "center",
       marginTop: 25,
-      borderRight: "2px solid grey"
     },
     heading: {
       fontWeight: "bold",
       marginBottom: 20,
-      fontFamily: "Montserrat"
+      fontFamily: "Montserrat",
+      paddingLeft: 15
     },
     description: {
       width: "100%",
