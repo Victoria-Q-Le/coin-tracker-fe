@@ -77,7 +77,6 @@ const CoinPage = () => {
 
         <Typography variant='subtitle1' className={classes.description}> 
           <div dangerouslySetInnerHTML={{__html: coin?.description.en}}></div>
-          {/* {coin?.description.en} */}
         </Typography>
 
         <div className={classes.marketData}>
@@ -103,16 +102,16 @@ const CoinPage = () => {
             </Typography>
           </span>
 
-          {/* <span style={{display: 'flex'}}>
-            <Typography variant='h5' className={classes.heading}>Current Price: </Typography>
+          <span style={{display: 'flex'}}>
+            <Typography variant='h5' className={classes.heading}>Market Cap: </Typography>
             &nbsp; &nbsp;
             <Typography
               variant='h5'
               style={{fontFamily: "Montserrat"}}
             >
-              {symbol} {" "} 
+              {symbol} {" "} {numberWithCommas(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0,-6))} M
             </Typography>
-          </span> */}
+          </span>
         </div>
 
       {/* Chart */}
