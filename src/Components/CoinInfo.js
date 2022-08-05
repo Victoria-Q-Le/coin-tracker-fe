@@ -1,4 +1,4 @@
-import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core';
+import { CircularProgress, createTheme, makeStyles, ThemeProvider } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { CoinState } from "../CoinContext";
@@ -49,7 +49,12 @@ const CoinInfo = ({coin}) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className={classes.container}></div>
+      <div className={classes.container}>
+        {!historicalData
+          ? (<CircularProgress style={{color:"gold"}} size={25} thickness={1} />)
+          : (<></>)
+        }
+      </div>
     </ThemeProvider>
   )
 }
