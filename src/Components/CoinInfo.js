@@ -1,8 +1,10 @@
 import { CircularProgress, createTheme, makeStyles, ThemeProvider } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Line, Chart } from 'react-chartjs-2';
 import { CoinState } from "../CoinContext";
 import { HistoricalChart } from "../config/api";
+import { Chart as ChartJS } from 'chart.js/auto'
 
 const CoinInfo = ({coin}) => {
   const [historicalData, setHistoricalData] = useState()
@@ -13,6 +15,7 @@ const CoinInfo = ({coin}) => {
     const {data} = await axios.get(HistoricalChart(coin.id, days, currency))
     setHistoricalData(data.prices)
   }
+  console.log( historicalData);
 
   useEffect(() => {
     fetchHistoricalData()
@@ -52,7 +55,22 @@ const CoinInfo = ({coin}) => {
       <div className={classes.container}>
         {!historicalData
           ? (<CircularProgress style={{color:"gold"}} size={25} thickness={1} />)
-          : (<></>)
+          : (<>
+              <Line 
+                data={{
+                  labels: historicalData.map((coin) => {
+                    let date = new Date(coin[0])
+                    let time = 
+                    date.getHours() > 12 
+                      ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                      : `${date.getHours()}:${date.getMinutes()} AM`
+                  return days === 1 ? time : date.toLocaleDateString()
+                  }),
+                  datasets: [{ data: historicalData.map((coin) => coin[1]),
+                  label: `Price ( Past ${days} Days) in ${currency}`}]
+                }}
+              />
+            </>)
         }
       </div>
     </ThemeProvider>
