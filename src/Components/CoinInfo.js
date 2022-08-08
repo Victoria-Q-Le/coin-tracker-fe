@@ -5,6 +5,8 @@ import { Line, Chart } from 'react-chartjs-2';
 import { CoinState } from "../CoinContext";
 import { HistoricalChart } from "../config/api";
 import { Chart as ChartJS } from 'chart.js/auto'
+import {chartDays} from '../config/data'
+import SelectButton from './SelectButton';
 
 const CoinInfo = ({coin}) => {
   const [historicalData, setHistoricalData] = useState()
@@ -67,9 +69,32 @@ const CoinInfo = ({coin}) => {
                   return days === 1 ? time : date.toLocaleDateString()
                   }),
                   datasets: [{ data: historicalData.map((coin) => coin[1]),
-                  label: `Price ( Past ${days} Days) in ${currency}`}]
+                  label: `Price ( Past ${days} Days) in ${currency}`,
+                  borderColor: "gold",
+                  }]
+                }}
+                options={{
+                  elements: {
+                    point: {
+                      radius:1,
+                    }
+                  }
                 }}
               />
+
+              {/* buttons */}
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: 20,
+                  justifyContent: "space-around",
+                  width: "100%"
+                }}
+              >
+                {chartDays.map( day => (
+                  <SelectButton>{day.label}</SelectButton>
+                ))}
+              </div>
             </>)
         }
       </div>

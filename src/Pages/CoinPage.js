@@ -93,7 +93,7 @@ const CoinPage = () => {
         <Typography variant='h3' className={classes.heading}> {coin?.name} </Typography>
 
         <Typography variant='subtitle1' className={classes.description}> 
-          <div dangerouslySetInnerHTML={{__html: coin?.description.en}}></div>
+          <div dangerouslySetInnerHTML={{__html: coin?.description.en.split(".",[4])}}></div>
         </Typography>
 
         <div className={classes.marketData}>
